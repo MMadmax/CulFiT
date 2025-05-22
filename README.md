@@ -1,7 +1,7 @@
 # CulFiT
 
 **Official code implementation for ACL25 'CulFiT: A Fine-grained Cultural-aware LLM Training Paradigm via Multilingual Critique Data Synthesis'**
-
+![main](./imgs/main.jpg)
 
 
 # Inference
@@ -28,7 +28,11 @@ We also provide the scripts for all our training data synthesis
 bash ./src/scripts.sh
 ```
 
-
+#Evaluation
+You can evaluate your results by using
+```python
+python ./src/eval/eval_method.py --input_file YOUR_INPUT_FILE --output_file YOUR_OUTPUT_FILE
+```
 
 # Acknowledgements
 
