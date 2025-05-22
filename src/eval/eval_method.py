@@ -122,13 +122,11 @@ def saving_file(rows, precision_all, recall_all, f1_score_all, output_file):
 
 
 def main():
-    input_file = '/data/home/frx/cultural_llm/output_data/test_data/test_result/original/ablation/seallms1.csv'
-    # input_file1 = '/data/home/frx/cultural_llm/output_data/culturebank_data/reddit/culturebank_data_twitter_reddit_points_eval.csv'
-    output_file = '/data/home/frx/cultural_llm/output_data/test_data/test_result/original/ablation/seallms1_eval.csv'
-    # data_temp = pandas.read_csv(input_file1)
-    data = pandas.read_csv(input_file)
-    # data = data[len(pandas.read_csv(input_file1)) + 1:]
-    # data = data[:2]
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--input_file', type=str, required=True)
+    parser.add_argument('--output_file', type=str, required=True)
+    args = parser.parse_args()
+    data = pandas.read_csv(args.input_file)
     precision_all = []
     recall_all = []
     f1_score_all = []
@@ -160,14 +158,14 @@ def main():
             rows.append(construct_culturebank_row(row))
             print(f"Precision: {precision}, Recall: {recall}, F1 Score: {f1_score}")
             if idx % 20 == 0:
-                saving_file(rows, precision_all, recall_all, f1_score_all, output_file)
-                print('-'*20 + f'evaluation data has been saved to {output_file} at idx {idx}' + '-'*20)
+                saving_file(rows, precision_all, recall_all, f1_score_all, args.output_file)
+                print('-'*20 + f'evaluation data has been saved to {args.output_file} at idx {idx}' + '-'*20)
         except Exception as e:
             print(f'Error at idx {idx}: {e}')
-            saving_file(rows, precision_all, recall_all, f1_score_all, output_file)
+            saving_file(rows, precision_all, recall_all, f1_score_all, args.output_file)
             continue
 
-    saving_file(rows, precision_all, recall_all, f1_score_all, output_file)
+    saving_file(rows, precision_all, recall_all, f1_score_all, args.output_file)
 
 
 
